@@ -1,0 +1,36 @@
+name:                incrementalism
+version:             0.1.0.0
+#synopsis:
+#description:
+homepage:            https://github.com/olle/incrementalism#readme
+license:             BSD3
+author:              Olle Fredriksson
+maintainer:          fredriksson.olle@gmail.com.com
+copyright:           2018 Olle Fredriksson
+category:            Language
+
+ghc-options:
+  - -O2
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-home-modules
+  - -Wpartial-fields
+  - -Wredundant-constraints
+  - -Wtabs
+  - -funbox-strict-fields
+
+extra-source-files:
+- README.md
+
+dependencies:
+- base >= 4.7 && < 5
+- protolude
+- text
+
+executables:
+  incrementalism:
+    source-dirs:      src
+    main:             Main.hs
