@@ -1,9 +1,11 @@
 {-# language GeneralizedNewtypeDeriving #-}
 {-# language MultiParamTypeClasses #-}
+{-# language NoImplicitPrelude #-}
 {-# language PatternSynonyms #-}
 {-# language ViewPatterns #-}
 module Rope where
 
+import Prelude(Show(show))
 import Protolude hiding (uncons, unsnoc)
 
 import Data.String
@@ -19,7 +21,10 @@ infixr 5 :<
 infixl 5 :>
 
 newtype Rope = Rope (SplayTree Delta Text)
-  deriving (Show, Semigroup, Monoid)
+  deriving (Semigroup, Monoid)
+
+instance Show Rope where
+  show = Prelude.show . toText
 
 instance Eq Rope where
   (==) = (==) `on` toText
@@ -97,6 +102,9 @@ last = fmap snd . unsnoc
 
 null :: Rope -> Bool
 null r = measure r == Delta 0
+
+tail :: Rope -> Rope
+tail = fold . fmap snd . uncons
 
 -------------------------------------------------------------------------------
 -- * Breaking by predicate
